@@ -7,6 +7,9 @@ import cmath
 import math
 from matplotlib import colors
 
+COLOR_TO = (173/255, 216/255, 230/255) # Light Blue
+COLOR_FROM = (0, 0, 0) # Black
+
 
 def log2(x):
 	return cmath.log(x, 2)
@@ -57,10 +60,10 @@ def determineColor(nDiverge, i, scale=256, clr=DEFAULT_COLOR):
 
 def generateCmap(boundMap):
 	# BoundMap = [ (color, number), ... ]
-	dedup = [boundMap[i] for i in range(len(boundMap)) if i == 0 or boundMap[i] != boundMap[i-1]]
-	boundMap = dedup
 	BOUNDS_L, COLOR_L = constructBounds(boundMap)
-	print(BOUNDS_L)
+	for i in range(len(COLOR_L)):
+		COLOR_L_F = np.array([float(x) for x in COLOR_L[i]], dtype=np.float64)
+		COLOR_L[i] = COLOR_L_F / 256.0
 	cmap = colors.ListedColormap(COLOR_L)
 	norm = colors.BoundaryNorm(BOUNDS_L, cmap.N)
 	return cmap, norm

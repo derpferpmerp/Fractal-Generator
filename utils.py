@@ -26,13 +26,21 @@ def constructBounds(lst, tau=0.1):
 	for i in range(len(lstSorted)):
 		choice = "L" if (i == len(lstSorted) - 1) else ("F" if i==0 else "M")
 		item = lstSorted[i]
+		if i > 0:
+			if sorted(item[0]) == sorted(FINALCOLORS[-1]):
+				continue
+			else:
+				j = FINALBOUNDS[-1]
+				print(j, type(j))
 		if choice == "F":
-			FINALBOUNDS.append(0)
+			FINALBOUNDS.append(item[1][0])
 		elif choice == "L":
 			FINALBOUNDS.append(item[1][0])
 			FINALBOUNDS.append(item[1][-1])
 		elif choice == "M":
-			FINALBOUNDS.append(item[1][0])
+			I = item[1][0]
+			if I != FINALBOUNDS[-1]:
+				FINALBOUNDS.append(item[1][0])
 		FINALCOLORS.append(item[0])
-			
+	print(FINALBOUNDS)
 	return FINALBOUNDS, FINALCOLORS
