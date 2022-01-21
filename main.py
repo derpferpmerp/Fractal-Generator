@@ -184,4 +184,9 @@ cmap, norm = generateCmap(colorsL)
 
 plt.imshow(GRID, cmap=cmap, norm=norm)
 hidePlotBounds(ax)
-plt.savefig("out.png")
+plt.savefig(
+	"out.png",
+	bbox_inches='tight',
+	pad_inches=0,
+	format='png',
+)
