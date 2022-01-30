@@ -24,7 +24,8 @@ class Mandelbrot(object):
         ITERATIONS=100,
         EQUATION=lambda z, c: z*z + c,
         OUTFILE="Mandelbrot.png",
-        GRADUALRATE=2048
+        GRADUALRATE=2048,
+        Z_I=0
     ):
         '''
         Attributes: 
@@ -50,6 +51,7 @@ class Mandelbrot(object):
         )
         self.GENERATOR = EQUATION
         self.OUTFILE = OUTFILE
+        self.Z_I = Z_I
         
     def determinePoints(self):
         '''
@@ -104,7 +106,7 @@ class Mandelbrot(object):
             iterations = self.ITERATIONS
         
         bounded = True
-        z_n = 0
+        z_n = self.Z_I
         plotColor = [Color(rgb=(0, 0, 0)).rgb, 0]
         while bounded and iterations > 0:
             z_n1 = self.GENERATOR(z_n, c)
