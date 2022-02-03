@@ -1,8 +1,8 @@
-import cmath
 from cmath import atan, cos, exp
 from cmath import log as ln
 from cmath import pi as PI
 from cmath import sin, sqrt, tan
+
 
 def spiralMandelbrot(z, c):
     return (z + c) * (z + c) + (z + c)
@@ -16,18 +16,18 @@ def antBrot(z, c):
 def shoeFractal(z, c):
     return complex(
         z.real * z.real + z.real * z.imag + c.real,
-        z.imag * z.imag - z.real * z.imag + c.imag
+        z.imag * z.imag - z.real * z.imag + c.imag,
     )
 
 # Num 87
 def arrowFractal(z, c):
-    a, b = ( c.real, c.imag )
-    x, y = ( z.real, z.imag )
+    a, b = ( c.real, c.imag)
+    x, y = ( z.real, z.imag)
     return complex(
         pow(x,3) - y * pow(x,2) + x * pow(y,2) - x*y + a,
-        pow(y,3) - x * pow(y,2) + y * pow(x,2) + x*y + b
+        pow(y,3) - x * pow(y,2) + y * pow(x,2) + x*y + b,
     )
-    
+
 # Horn Fractal??
 def hornFractal(z, c):
     z_i = complex(pow(10,-4),pow(10,-4))
@@ -49,8 +49,7 @@ def featherDuster(z, c):
 # Carpet
 # 10/10 With 1250 Points C_I = (0, 0, 0.77)
 def EQ(z, c):
-    a, b = ( c.real, c.imag )
-    x, y = ( z.real, z.imag )
+    a, b = ( c.real, c.imag)
+    x, y = ( z.real, z.imag)
     #return pow( pow(z,2) + pow(c, 2), 2 * z )
     return z * z * sin(x) + c * z * y + z * z * cos(x) + c * z * sin(y) + c
-

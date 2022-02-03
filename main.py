@@ -9,6 +9,7 @@ from tqdm import tqdm
 
 from utils import constructBounds, hidePlotBounds
 
+
 COLOR_TO = (14/255, 111/255, 125/255)              # Light Blue
 COLOR_FROM = (0, 0, 0)                             # Black
 NUMBER_POINTS = 500                                # Side Length of Square
@@ -24,7 +25,7 @@ def log2(x):
 	Function: log2
 	Summary: Returns the Base 2 Logarithm of a complex number
 	Examples: log2(complex(1,0))
-	Attributes: 
+	Attributes:
 			@param (x): Complex Number Input
 	Returns: Complex Number
 	'''
@@ -36,7 +37,7 @@ def sqrt(x):
 	Function: sqrt
 	Summary: Returns the Square Root of a Complex Number
 	Examples: sqrt(complex(1,1))
-	Attributes: 
+	Attributes:
 			@param (x): The Complex Number to Root
 	Returns: Complex Number
 	'''
@@ -49,7 +50,7 @@ def ComplexModulo(a, b):
 	Summary: Completes a Modulo in the Imaginary and Real Dimensions
 	Examples: ComplexModulo(4 + 4j, 2)
 	Format: "a mod b" -> ComplexModulo(a,b)
-	Attributes: 
+	Attributes:
 			@param (a): First Term
 			@param (b): Second Term
 	Returns: Complex Number
@@ -76,7 +77,7 @@ def generateGradient(from_I, to_I, numPoints=2048):
 	Function: generateGradient
 	Summary: Generates a color gradient
 	Examples: generateGradient( (0, 0, 0), (1, 1, 1) )
-	Attributes: 
+	Attributes:
 			@param (from_I): RGB Tuple (Starting Point of Gradient)
 			@param (to_I):   RGB Tuple (Ending Point of Gradient)
 			@param (numPoints) default=2048: Number of Steps in Gradient
@@ -102,7 +103,7 @@ def determineColor(nDiverge, i, scale=256, clr=DEFAULT_COLOR):
 	Function: determineColor
 	Summary: Evaluates the Color for the given Pixel in the Mandelbrot Set
 	Examples: determineColor((0+4j), 0)
-	Attributes: 
+	Attributes:
 			@param (nDiverge): The Complex Coordinate where the Pixel Diverged
 			@param (i): The Number of Iterations from the Pixel
 			@param (scale) default=256:
@@ -113,10 +114,12 @@ def determineColor(nDiverge, i, scale=256, clr=DEFAULT_COLOR):
 	'''
 	smoothed = log2(log2(nDiverge*nDiverge)/2)
 	colors = clr
-	colorI = (ComplexModulo(
-		math.floor((sqrt(i + 10 - smoothed) * 256).real),
-		len(colors)
-	)).real
+	colorI = (
+     ComplexModulo(
+      math.floor((sqrt(i + 10 - smoothed) * 256).real),
+      len(colors),
+     )
+ ).real
 	colorI = math.floor(colorI)
 	return colors[colorI], colorI
 
@@ -126,7 +129,7 @@ def generateCmap(boundMap):
 	Function: generateCmap
 	Summary: Converts Boundary Map to Color Map and Norm
 	Examples: generateCmap( ((R, G, B), 200), ... )
-	Attributes: 
+	Attributes:
 			@param (boundMap):
 					Description: Bounaries Corresponding to the Colors
 					Format: [ (color, number), ... ]
@@ -147,7 +150,7 @@ def isBounded(c, iterations=ITERATIONS):
 	Function: isBounded
 	Summary: Evaluates the Mandelbrot Set and assosciates the response with a color
 	Examples: isBounded(0 + 1j)
-	Attributes: 
+	Attributes:
 			@param (c): Complex Number representing the coordinate to evaluate
 			@param (iterations) default=ITERATIONS: number of iterations until proven bounded
 	Returns: Color
@@ -186,7 +189,7 @@ plt.imshow(GRID, cmap=cmap, norm=norm)
 hidePlotBounds(ax)
 plt.savefig(
 	"out.png",
-	bbox_inches='tight',
+	bbox_inches="tight",
 	pad_inches=0,
-	format='png',
+	format="png",
 )

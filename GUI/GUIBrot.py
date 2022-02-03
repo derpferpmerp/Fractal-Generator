@@ -5,7 +5,7 @@ import numpy as np
 from colour import Color
 from tqdm import tqdm
 
-from utils import (
+from GUIutils import (
     ComplexModulo, generateCmap, generateGradient, hidePlotBounds, log2, sqrt,
 )
 
@@ -172,10 +172,7 @@ class Mandelbrot:
             fig, ax = plt.subplots(1, 1, figsize=(20, 20))
             plt.imshow(GRID, cmap=cmap, norm=norm)
             hidePlotBounds(ax)
-            plt.savefig(
-                self.OUTFILE,
-                bbox_inches="tight",
-                pad_inches=0,
-                format="png",
+            plt.show(
+                block=True
             )
         return GRID, cmap, norm
