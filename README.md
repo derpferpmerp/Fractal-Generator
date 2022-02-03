@@ -6,5 +6,5 @@ the function:<br>
 <br>stays bounded... Resulting in:
 <img src="https://i.ibb.co/QFH35bZ/MANDELBROT.png" />
 TODO:
-[ ] Allow for User Uploaded Python Files to Be Imported And Used
-[x] Complete the GUI
+- [ ] Allow for User Uploaded Python Files to Be Imported And Used
+- [X] Complete the GUI
