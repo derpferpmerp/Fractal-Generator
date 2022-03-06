@@ -5,9 +5,12 @@ description = ""
 authors = ["Cole Fleming <cmfleming@eths202.org>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8,<3.11"
 tqdm = "^4.62.3"
 colour = "^0.1.5"
+scipy = "^1.8.0"
+matplotlib = "^3.5.1"
+PySimpleGUI = "^4.57.0"
 
 [tool.poetry.dev-dependencies]
 

@@ -3,8 +3,6 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 from colour import Color
-from tqdm import tqdm
-
 from GUIutils import (
     ComplexModulo, generateCmap, generateGradient, hidePlotBounds, log2, sqrt,
 )
@@ -116,6 +114,7 @@ class Mandelbrot:
             iterations -= 1
         return plotColor
 
+
     def process(self, x_i, y_i, GRID, cpoint=0, colorsLST=[]):
         '''
         Function: process
@@ -154,18 +153,23 @@ class Mandelbrot:
 
         colorsL = []
         L_TO_ITER = []
-
         for x_i in range(self.C_RANGE[2]):
             for y_i in range(self.C_RANGE[2]):
                 L_TO_ITER.append([x_i, y_i])
 
-        for x_i, y_i in [ tqdm(L_TO_ITER) if CLI else L_TO_ITER][0]:
+        len(L_TO_ITER) // 2
+        C_I = 0
+        for x_i, y_i in L_TO_ITER:
             colorsL, cpoint, GRID = self.process(
                 x_i, y_i,
                 GRID=GRID,
                 cpoint=cpoint,
                 colorsLST=colorsL,
             )
+            C_I += 1
+            if C_I % 2 == 0:
+                pass
+                #sg.one_line_progress_meter('Loading', C_I, MX, 'key', 'Parsing Coordinates')
 
         cmap, norm = generateCmap(colorsL)
         if GRAPH:
@@ -173,6 +177,6 @@ class Mandelbrot:
             plt.imshow(GRID, cmap=cmap, norm=norm)
             hidePlotBounds(ax)
             plt.show(
-                block=True
+                block=True,
             )
         return GRID, cmap, norm

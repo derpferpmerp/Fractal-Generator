@@ -1,5 +1,5 @@
-import json
 from GUIBrot import Mandelbrot
+
 
 def iMult(num):
     re = num.real
@@ -15,13 +15,13 @@ def EQ(z, c):
     return z * z + c
 
 def create(DICT_DATA):
-    COLOR_FROM = DICT_DATA['INPUT_COLOR']
-    COLOR_TO = DICT_DATA['OUTPUT_COLOR']
-    POINTS = DICT_DATA['POINTS']
-    IM_RANGE = DICT_DATA['IM_RANGE']
-    ITERATIONS = DICT_DATA['ITERATIONS']
-    EQUATION = DICT_DATA['EQUATION']
-    GRADUALRATE = DICT_DATA['CAMT']
+    COLOR_FROM = DICT_DATA["INPUT_COLOR"]
+    COLOR_TO = DICT_DATA["OUTPUT_COLOR"]
+    POINTS = DICT_DATA["POINTS"]
+    IM_RANGE = DICT_DATA["IM_RANGE"]
+    ITERATIONS = DICT_DATA["ITERATIONS"]
+    EQUATION = DICT_DATA["EQUATION"]
+    GRADUALRATE = DICT_DATA["CAMT"]
     Z_I = DICT_DATA["Z_I"]
     print(DICT_DATA)
     SET = Mandelbrot(
@@ -36,6 +36,3 @@ def create(DICT_DATA):
     )
 
     SET.run(CLI=False)
-    
-
-    

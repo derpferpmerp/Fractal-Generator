@@ -3,7 +3,6 @@ import numpy as np
 import PySimpleGUI as sg
 from colour import Color
 from numpy import floor
-from sympy import E
 
 from main import create as generate
 
@@ -146,15 +145,15 @@ layout, SLIDER_KEYS = recursivelyAdd(layout, GRADIENT_MANAGER, SLIDER_KEYS=SLIDE
 layout = addTitle(layout, "Graphing Info")
 layout.append([
     sg.Text("Equation (z, c)", size=(10, 1)),
-    sg.InputText("pow(z,2) + c", key="EQ_K", enable_events=True)
+    sg.InputText("pow(z,2) + c", key="EQ_K", enable_events=True),
 ])
 layout.append([
     sg.Text("Re( Z_I )", size=(10, 1)),
-    sg.InputText("0", key="Z_RE", enable_events=True)
+    sg.InputText("0", key="Z_RE", enable_events=True),
 ])
 layout.append([
     sg.Text("Im( Z_I )", size=(10, 1)),
-    sg.InputText("0", key="Z_IM", enable_events=True)
+    sg.InputText("0", key="Z_IM", enable_events=True),
 ])
 
 layout.append([sg.Button("Generate Simulation")])
@@ -170,13 +169,13 @@ matplotlibWindowOpen = False
 
 DATA = {
     "INPUT_COLOR": (0.0, 0.0, 0.77),
-    "OUTPUT_COLOR": (0.0, 0.0, 0.0),
+    "OUTPUT_COLOR": (14/255, 111/255, 125/255),
     "POINTS": 500,
     "IM_RANGE": [[-2, 2], [-2,2]],
     "ITERATIONS": 100,
-    "EQUATION": [ lambda z, c: pow(z,2) + c ][0],
+    "EQUATION": [ lambda z, c: pow(z,2) + c][0],
     "Z_I": 0,
-    "CAMT": 2048
+    "CAMT": 2048,
 }
 
 while True:
@@ -220,14 +219,14 @@ while True:
 
         print(DATA)
     elif event == "-Points SLIDER-":
-        DATA["POINTS"] = values["-Points SLIDER-"]
+        DATA["POINTS"] = int(values["-Points SLIDER-"])
     elif event == "-Minimum X SLIDER-":
         MIN = values["-Minimum X SLIDER-"]
-        DATA["IM_RANGE"][0][0] = MIN
+        DATA["IM_RANGE"][0][0] = int(MIN)
         window["-Maximum X SLIDER-"].Update(range=(MIN, 10 + MIN))
     elif event == "-Minimum Y SLIDER-":
         MIN = values["-Minimum Y SLIDER-"]
-        DATA["IM_RANGE"][1][0] = MIN
+        DATA["IM_RANGE"][1][0] = int(MIN)
         window["-Maximum Y SLIDER-"].Update(range=(MIN, 10 + MIN))
     elif event == "-Maximum X SLIDER-":
         DATA["IM_RANGE"][0][1] = values["-Maximum X SLIDER-"]
@@ -236,16 +235,14 @@ while True:
     elif event == "-Initial Z SLIDER-":
         DATA["Z_I"] = values["-Initial Z SLIDER-"]
     elif event in ["Z_IM", "Z_RE"]:
-        if not any([ values[x] == "" for x in ["Z_IM", "Z_RE"] ]):
-            RE, IM = ( values["Z_RE"], values["Z_IM"] )
+        if not any(values[x] == "" for x in ["Z_IM", "Z_RE"]):
+            RE, IM = ( values["Z_RE"], values["Z_IM"])
             z_part = complex(float(RE), float(IM))
             DATA["Z_I"] = z_part
     elif event == "-Swatches Amount SLIDER-":
-        DATA["CAMT"] = values["-Swatches Amount SLIDER-"]
+        DATA["CAMT"] = int(values["-Swatches Amount SLIDER-"])
     elif event == "EQ_K":
-        DATA["EQUATION"] = lambda z, c: eval(values["EQ_K"].replace("z", z).replace("c", c))
-        
-    # for k in list(presets.keys()):
+        DATA["EQUATION"] = values["EQ_K"]
 
     for UTEXT, SLID in list(SLIDER_KEYS.items()):
         if window.Element(UTEXT) == None or values == None or values[SLID] == None:

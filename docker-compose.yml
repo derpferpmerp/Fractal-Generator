@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  mandelbrotfinally:
+    image: mandelbrotfinally
+    build:
+      context: .
+      dockerfile: ./Dockerfile
